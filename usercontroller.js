@@ -5,8 +5,6 @@ export const registerControllers = async (req, res, next) => {
     try{
         const {name, email, password} = req.body;
 
-        // console.log(name, email, password);
-
         if(!name || !email || !password){
             return res.status(400).json({
                 success: false,
@@ -23,11 +21,9 @@ export const registerControllers = async (req, res, next) => {
             });
         }
 
-        //preparing encrypted for storing db
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // console.log(hashedPassword);
         let newUser = await User.create({
             name, 
             email, 
@@ -52,7 +48,6 @@ export const loginControllers = async (req, res, next) => {
     try{
         const { email, password } = req.body;
 
-        // console.log(email, password);
   
         if (!email || !password){
             return res.status(400).json({
