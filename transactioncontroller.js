@@ -14,8 +14,6 @@ export const addTransactionController = async (req, res) => {
       transactionType,
     } = req.body;
 
-    // console.log(title, amount, description, date, category, userId, transactionType);
-
     if (
       !title ||
       !amount ||
@@ -89,7 +87,6 @@ export const getAllTransactionController = async (req, res) => {
       query.transactionType = type;
     }
 
-    // Add date conditions based on 'frequency' and 'custom' range
     if (frequency !== 'custom') {
       query.date = {
         $gt: moment().subtract(Number(frequency), "days").toDate()
@@ -101,11 +98,10 @@ export const getAllTransactionController = async (req, res) => {
       };
     }
 
-    // console.log(query);
+   
 
     const transactions = await Transaction.find(query);
-    //select * from transaction where date>18/02/2025
-    // console.log(transactions);
+ 
 
     return res.status(200).json({
       success: true,
@@ -125,7 +121,6 @@ export const deleteTransactionController = async (req, res) => {
     const transactionId = req.params.id;
     const userId = req.body.userId;
 
-    // console.log(transactionId, userId);
 
     const user = await User.findById(userId);
 
@@ -154,7 +149,6 @@ export const deleteTransactionController = async (req, res) => {
 
     user.save();
 
-    // await transactionElement.remove();
 
     return res.status(200).json({
       success: true,
@@ -211,7 +205,6 @@ export const updateTransactionController = async (req, res) => {
 
     await transactionElement.save();
 
-    // await transactionElement.remove();
 
     return res.status(200).json({
       success: true,
