@@ -1,9 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
 
-// User Schema Model - (Name, email, password, creation Date) with validation rules
-//new mongoose.Schema({feild1:{type:dtype,contraint:value},feild2:{type:dtype,contraint:value}})
-//CREATE TABLE USER(name varchar(25) notnull)
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
